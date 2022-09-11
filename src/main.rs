@@ -40,6 +40,7 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
+    // Hex to Binary
     if let Some(num) = args.hb {
         print!("Binary: ");
         hex::decode(num)
@@ -53,6 +54,21 @@ fn main() {
         println!("");
     }
 
+    // Hex to Decimal
+    if let Some(num) = args.hd {
+        print!("Decimal: ");
+        let mut s = String::new();
+        hex::decode(num)
+            .expect("Error when decoding Hex")
+            .into_iter()
+            .for_each(|x| {
+                s.push_str(&format!("{:b}", x));
+            });
+        print!("{}", usize::from_str_radix(&s, 2).unwrap());
+        println!("");
+    }
+
+    // Get Mask
     if let Some(mask) = args.mask {
         let bits_numbers: Vec<usize> = mask
             .split(",")
