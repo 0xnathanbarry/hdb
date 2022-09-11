@@ -54,13 +54,18 @@ fn main() {
     }
 
     if let Some(mask) = args.mask {
-        let bits_numbers: Vec<u32> = mask
+        let bits_numbers: Vec<usize> = mask
             .split(",")
-            .map(|x| x.parse::<u32>().expect("Error in parsing mask u32s"))
+            .map(|x| x.parse::<usize>().expect("Error in parsing mask u32s"))
             .collect();
-        let mut bitvec1 = vec![1; bits_numbers[0] as usize];
-        let mut bitvec0 = vec![0; bits_numbers[1] as usize];
+        let mut bitvec1 = vec![1 as u8; bits_numbers[0]];
+        let mut bitvec0 = vec![0 as u8; bits_numbers[1]];
         bitvec1.append(&mut bitvec0);
-        println!("{:?}", bitvec1);
+        let mut s = String::new();
+        bitvec1
+            .into_iter()
+            .for_each(|x| s.push(if x == 1 { '1' } else { '0' }));
+        println!("{}", s);
+        println!("{}", usize::from_str_radix(&s, 2).unwrap());
     }
 }
