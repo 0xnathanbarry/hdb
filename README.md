@@ -21,7 +21,6 @@
 	Binary Mask: 11100000
 	Decimal: 224
 	Hex: E0
-	$
 	```
 	
 ## Notes
