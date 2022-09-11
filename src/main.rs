@@ -47,9 +47,11 @@ fn main() {
             .expect("Error when decoding Hex")
             .into_iter()
             .for_each(|x| {
-                let mut former = format!("{:0>8b}", x);
-                let latter = former.split_off(4);
-                print!("{} {} ", former, latter);
+                print!("{:0>8b}", x);
+                // Below is to add spaces between bytes
+                // let mut former = format!("{:0>8b}", x);
+                // let latter = former.split_off(4);
+                // print!("{} {} ", former, latter);
             });
         println!("");
     }
@@ -73,6 +75,21 @@ fn main() {
         println!("Binary: {:b}", num.parse::<usize>().unwrap());
     }
 
+    // Decimal to Hex
+    if let Some(num) = args.dh {
+        println!("Hex: {:X}", num.parse::<usize>().unwrap());
+    }
+
+    // Binary To Decimal
+    if let Some(num) = args.bd {
+        println!("Decimal: {}", usize::from_str_radix(&num, 2).unwrap());
+    }
+
+    // Binary To Hex
+    if let Some(num) = args.bh {
+        println!("Hex: {:X}", usize::from_str_radix(&num, 2).unwrap());
+    }
+
     // Get Mask
     if let Some(mask) = args.mask {
         let bits_numbers: Vec<usize> = mask
@@ -87,7 +104,7 @@ fn main() {
             .into_iter()
             .for_each(|x| s.push(if x == 1 { '1' } else { '0' }));
         let num = usize::from_str_radix(&s, 2).unwrap();
-        println!("Binary Mask: {}", s);
+        println!("Binary Mask: {:b}", num);
         println!("Decimal: {}", num);
         println!("Hex: {:X}", num);
     }
