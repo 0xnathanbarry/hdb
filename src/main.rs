@@ -68,6 +68,11 @@ fn main() {
         println!("");
     }
 
+    // Decimal to Binary
+    if let Some(num) = args.db {
+        println!("Binary: {:b}", num.parse::<usize>().unwrap());
+    }
+
     // Get Mask
     if let Some(mask) = args.mask {
         let bits_numbers: Vec<usize> = mask
