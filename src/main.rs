@@ -65,7 +65,9 @@ fn main() {
         bitvec1
             .into_iter()
             .for_each(|x| s.push(if x == 1 { '1' } else { '0' }));
-        println!("{}", s);
-        println!("{}", usize::from_str_radix(&s, 2).unwrap());
+        let num = usize::from_str_radix(&s, 2).unwrap();
+        println!("Binary Mask: {}", s);
+        println!("Decimal: {}", num);
+        println!("Hex: {:X}", num);
     }
 }
